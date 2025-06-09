@@ -1,0 +1,311 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-4 text-primary">
+          <i class="bi bi-bell-fill me-2"></i>Notifications
+        </h1>
+        <button class="btn btn-primary btn-lg" (click)="showForm = true">
+          <i class="bi bi-plus-circle me-2"></i>Create Notification
+        </button>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="card border-primary">
+            <div class="card-body text-center">
+              <h3 class="text-primary">Total</h3>
+              <span class="display-6 fw-bold text-primary">{{
+                notifications.length
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-warning">
+            <div class="card-body text-center">
+              <h3 class="text-warning">Unread</h3>
+              <span class="display-6 fw-bold text-warning">{{
+                unreadCount
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-success">
+            <div class="card-body text-center">
+              <h3 class="text-success">Read</h3>
+              <span class="display-6 fw-bold text-success">{{
+                notifications.length - unreadCount
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                [class.active]="filter === 'all'"
+                (click)="filter = 'all'"
+              >
+                All ({{ notifications.length }})
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                [class.active]="filter === 'unread'"
+                (click)="filter = 'unread'"
+              >
+                Unread ({{ unreadCount }})
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                [class.active]="filter === 'read'"
+                (click)="filter = 'read'"
+              >
+                Read ({{ notifications.length - unreadCount }})
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Error Alert -->
+      <div
+        *ngIf="error"
+        class="alert alert-danger alert-dismissible"
+        role="alert"
+      >
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        {{ error }}
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm ms-2"
+          (click)="loadNotifications()"
+        >
+          <i class="bi bi-arrow-clockwise me-1"></i>Retry
+        </button>
+      </div>
+      <!-- Loading State -->
+      <div
+        *ngIf="loading"
+        class="d-flex justify-content-center align-items-center py-5"
+      >
+        <div class="text-center">
+          <div
+            class="spinner-border text-primary mb-3"
+            role="status"
+            style="width: 3rem; height: 3rem"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <h5 class="text-muted">Loading notifications...</h5>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div
+        *ngIf="!loading && filteredNotifications.length === 0"
+        class="text-center py-5"
+      >
+        <div class="card">
+          <div class="card-body py-5">
+            <i class="bi bi-bell-slash display-1 text-muted mb-3"></i>
+            <h3 class="text-muted">No notifications found</h3>
+            <p class="text-muted">
+              {{
+                filter === "all"
+                  ? "You have no notifications yet."
+                  : "No " + filter + " notifications."
+              }}
+            </p>
+            <button
+              *ngIf="filter !== 'all'"
+              class="btn btn-outline-primary"
+              (click)="filter = 'all'"
+            >
+              View All Notifications
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Notification List -->
+      <div *ngIf="!loading && filteredNotifications.length > 0" class="row">
+        <div class="col-12">
+          <div
+            *ngFor="
+              let notification of filteredNotifications;
+              trackBy: trackByFn
+            "
+            class="card mb-3"
+            [class.border-warning]="!notification.read"
+            [class.bg-light]="notification.read"
+          >
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex align-items-center">
+                <span class="me-2" style="font-size: 1.5rem">{{
+                  getTypeIcon(notification.type)
+                }}</span>
+                <span
+                  class="badge rounded-pill me-2"
+                  [class.bg-success]="notification.type === 'success'"
+                  [class.bg-warning]="notification.type === 'warning'"
+                  [class.bg-danger]="notification.type === 'error'"
+                  [class.bg-info]="notification.type === 'info'"
+                >
+                  {{ notification.type | titlecase }}
+                </span>
+                <span
+                  *ngIf="!notification.read"
+                  class="badge bg-warning text-dark"
+                >
+                  <i class="bi bi-circle-fill me-1"></i>Unread
+                </span>
+              </div>
+
+              <div class="btn-group" role="group">
+                <button
+                  *ngIf="!notification.read"
+                  class="btn btn-outline-primary btn-sm"
+                  (click)="markAsRead(notification)"
+                  title="Mark as read"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button
+                  *ngIf="notification.read"
+                  class="btn btn-outline-secondary btn-sm"
+                  (click)="markAsUnread(notification)"
+                  title="Mark as unread"
+                >
+                  <i class="bi bi-envelope"></i>
+                </button>
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  (click)="deleteNotification(notification)"
+                  title="Delete notification"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">{{ notification.title }}</h5>
+              <p class="card-text">{{ notification.message }}</p>
+              <div class="card-footer bg-transparent">
+                <small class="text-muted">
+                  <i class="bi bi-clock me-1"></i>
+                  {{ formatDate(notification.createdAt) }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Create Notification Modal -->
+      <div
+        *ngIf="showForm"
+        class="modal d-block"
+        tabindex="-1"
+        style="background-color: rgba(0, 0, 0, 0.5)"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                <i class="bi bi-plus-circle me-2"></i>Create New Notification
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                (click)="showForm = false"
+              ></button>
+            </div>
+
+            <form
+              #notificationForm="ngForm"
+              (ngSubmit)="onSubmitForm(notificationForm)"
+            >
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="title" class="form-label"
+                    >Title <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    ngModel
+                    required
+                    placeholder="Enter notification title"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="message" class="form-label"
+                    >Message <span class="text-danger">*</span></label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    name="message"
+                    ngModel
+                    required
+                    rows="4"
+                    placeholder="Enter notification message"
+                  ></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="type" class="form-label">Type</label>
+                  <select
+                    class="form-select"
+                    id="type"
+                    name="type"
+                    ngModel="info"
+                  >
+                    <option value="info">Info</option>
+                    <option value="success">Success</option>
+                    <option value="warning">Warning</option>
+                    <option value="error">Error</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="showForm = false"
+                >
+                  <i class="bi bi-x-circle me-2"></i>Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!notificationForm.valid"
+                >
+                  <i class="bi bi-check-circle me-2"></i>Create Notification
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
