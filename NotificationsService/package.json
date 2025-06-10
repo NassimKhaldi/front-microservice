@@ -1,5 +1,5 @@
 {
-  "name": "notifications-service",
+  "name": "task-management-notifications-service",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

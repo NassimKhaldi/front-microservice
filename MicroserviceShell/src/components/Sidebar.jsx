@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen, serviceStatus }) => {
               <h4>Welcome, {user?.name || user?.email}</h4>
               <p className="user-role">User Dashboard</p>
             </div>
-            
+
             <h3>Navigation</h3>
             <ul className="nav-links">
               <li>
@@ -42,7 +42,10 @@ const Sidebar = ({ isOpen, serviceStatus }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/notifications" className={isActive("/notifications")}>
+                <Link
+                  to="/notifications"
+                  className={isActive("/notifications")}
+                >
                   🔔 Notifications
                 </Link>
               </li>
@@ -75,14 +78,18 @@ const Sidebar = ({ isOpen, serviceStatus }) => {
                 <Link to="/login" className={isActive("/login")}>
                   🔐 Login
                 </Link>
-              </li>
+              </li>{" "}
               <li>
-                <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer">
-                  📝 Sign Up
+                <a
+                  href="http://localhost:5173"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  📝 Sign Up (User Service)
                 </a>
               </li>
             </ul>
-            
+
             <div className="info-section">
               <h4>About This Platform</h4>
               <p>A microservice architecture demonstration with:</p>
@@ -95,7 +102,6 @@ const Sidebar = ({ isOpen, serviceStatus }) => {
             </div>
           </>
         )}
-
         <h3>Service Status</h3>
         <ul className="service-status-list">
           <li className="service-status-item">
@@ -114,26 +120,28 @@ const Sidebar = ({ isOpen, serviceStatus }) => {
             <span className="service-name">Notification Service</span>
             {getStatusBadge(serviceStatus.notification)}
           </li>
-        </ul>
-
+        </ul>{" "}
         {isAuthenticated && (
           <div className="microservice-links">
-            <h3>Direct Service Access</h3>
+            <h3>Microservices</h3>
             <ul className="service-links">
               <li>
-                <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer">
-                  🔗 User Service
-                </a>
+                <Link to="/users" className={isActive("/users")}>
+                  👥 User Service
+                </Link>
               </li>
               <li>
-                <a href="http://localhost:5175" target="_blank" rel="noopener noreferrer">
-                  🔗 Task Service
-                </a>
+                <Link to="/tasks" className={isActive("/tasks")}>
+                  📋 Task Service
+                </Link>
               </li>
               <li>
-                <a href="http://localhost:4200" target="_blank" rel="noopener noreferrer">
-                  🔗 Notification Service
-                </a>
+                <Link
+                  to="/notifications"
+                  className={isActive("/notifications")}
+                >
+                  🔔 Notification Service
+                </Link>
               </li>
             </ul>
           </div>

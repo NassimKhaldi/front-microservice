@@ -26,6 +26,15 @@ export class AppComponent implements OnInit {
         console.error('Error parsing user data:', error);
       }
     }
+
+    // Listen for authentication messages from parent window (MicroserviceShell)
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'AUTH_TOKEN') {
+        // Store the authentication data received from parent
+        localStorage.setItem('token', event.data.token);
+        localStorage.setItem('user', JSON.stringify(event.data.user));
+      }
+    });
   }
 
   get isAuthenticated(): boolean {

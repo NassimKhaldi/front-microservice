@@ -1,5 +1,5 @@
 {
-  "name": "microservice-shell",
+  "name": "task-management-shell",
   "private": true,
   "version": "0.0.0",
   "type": "module",

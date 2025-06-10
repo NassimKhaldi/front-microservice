@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-const Header = ({ toggleSidebar, serviceStatus, onRefreshStatus }) => {
+const Header = ({ serviceStatus, onRefreshStatus }) => {
   const { user, logout, isAuthenticated } = useAuth();
 
   const getOverallStatus = () => {
@@ -34,26 +34,33 @@ const Header = ({ toggleSidebar, serviceStatus, onRefreshStatus }) => {
 
   return (
     <header className="header">
+      {" "}
       <div className="header-left">
-        <button className="sidebar-toggle" onClick={toggleSidebar}>
-          ☰
-        </button>
         <div className="logo">
-          <Link to="/dashboard">Microservice Platform</Link>
+          <Link to="/dashboard">📋 Task Management Platform</Link>
         </div>
-      </div>
-
+      </div>{" "}
       <div className="header-center">
         {isAuthenticated && (
           <nav className="quick-nav">
-            <Link to="/dashboard" className="nav-item">🏠 Dashboard</Link>
-            <Link to="/users" className="nav-item">👥 Users</Link>
-            <Link to="/tasks" className="nav-item">📋 Tasks</Link>
-            <Link to="/notifications" className="nav-item">🔔 Notifications</Link>
+            <Link to="/dashboard" className="nav-item">
+              🏠 Dashboard
+            </Link>
+            <Link to="/profile" className="nav-item">
+              👤 Profile
+            </Link>
+            <Link to="/users" className="nav-item">
+              👥 Users
+            </Link>
+            <Link to="/tasks" className="nav-item">
+              📋 Tasks
+            </Link>
+            <Link to="/notifications" className="nav-item">
+              🔔 Notifications
+            </Link>
           </nav>
         )}
       </div>
-
       <div className="header-right">
         <div className="status-indicator">
           <div
@@ -69,14 +76,18 @@ const Header = ({ toggleSidebar, serviceStatus, onRefreshStatus }) => {
 
         {isAuthenticated ? (
           <div className="user-menu">
-            <span className="user-welcome">Hello, {user?.name || user?.email}</span>
+            <span className="user-welcome">
+              Hello, {user?.name || user?.email}
+            </span>
             <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>
           </div>
         ) : (
           <div className="auth-links">
-            <Link to="/login" className="login-link">Login</Link>
+            <Link to="/login" className="login-link">
+              Login
+            </Link>
           </div>
         )}
       </div>

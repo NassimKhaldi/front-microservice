@@ -1,146 +1,154 @@
+/* Professional Auth Styles with Bootstrap Enhancement */
 .auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.auth-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
-}
-
-.auth-form {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-}
-
-.auth-form h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-size: 1.8rem;
-  font-weight: 600;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #555;
-  font-weight: 500;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 5px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.auth-button {
-  width: 100%;
-  padding: 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 1rem;
-}
-
-.auth-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-}
-
-.auth-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-.error-message {
-  background-color: #fee;
-  border: 1px solid #fcc;
-  color: #c33;
-  padding: 0.75rem;
-  border-radius: 5px;
-  margin: 1rem 0;
-  font-size: 0.9rem;
-}
-
-.success-message {
-  background-color: #efe;
-  border: 1px solid #cfc;
-  color: #3c3;
-  padding: 0.75rem;
-  border-radius: 5px;
-  margin: 1rem 0;
-  font-size: 0.9rem;
-}
-
-.auth-switch {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
-}
-
-.auth-switch p {
-  margin: 0;
-  color: #666;
-}
-
-.link-button {
-  background: none;
-  border: none;
-  color: #667eea;
-  cursor: pointer;
-  text-decoration: underline;
-  font-size: inherit;
-  padding: 0;
-}
-
-.link-button:hover {
-  color: #764ba2;
-}
-
-/* Dashboard styles */
-.dashboard {
-  padding: 2rem;
-  max-width: 800px;
+  border-radius: 50%;
   margin: 0 auto;
 }
 
+.auth-logo i {
+  color: white !important;
+  font-size: 2.5rem !important;
+}
+
+/* Custom Card Styling */
+.card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Form Controls Enhancement */
+.form-control {
+  border: 2px solid #e9ecef !important;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25) !important;
+  transform: translateY(-1px);
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 0.7;
+}
+
+/* Button Styling */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.5) !important;
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-link {
+  color: #667eea !important;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.btn-link:hover {
+  color: #764ba2 !important;
+  text-decoration: underline !important;
+}
+
+/* Alert Styling */
+.alert-danger {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  border: none !important;
+  color: white;
+  font-weight: 500;
+}
+
+/* Loading Animation */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Loading Animation */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+  .auth-container {
+    padding: 1rem 0;
+  }
+
+  .card-body {
+    padding: 2rem !important;
+  }
+
+  .auth-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .auth-logo i {
+    font-size: 2rem !important;
+  }
+}
+
+/* Professional Dashboard Styles */
+.dashboard {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
 .dashboard-header {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e0e0e0;
 }
 
 .dashboard-title {
   color: #333;
   margin: 0;
+  font-weight: 700;
+  font-size: 1.8rem;
 }
 
 .user-info {
@@ -151,40 +159,78 @@
 
 .user-name {
   color: #555;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .logout-button {
-  padding: 0.5rem 1rem;
-  background: #dc3545;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .logout-button:hover {
-  background: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
 }
 
 .welcome-section {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 2rem;
-  border-radius: 10px;
+  padding: 3rem 2rem;
+  border-radius: 15px;
   text-align: center;
   margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
 .welcome-section h2 {
   margin: 0 0 1rem 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .welcome-section p {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   opacity: 0.9;
+}
+
+/* Additional Professional Touches */
+.form-label {
+  color: #495057 !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Custom HR styling */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #dee2e6, transparent);
+}
+
+/* Focus states for accessibility */
+*:focus {
+  outline: none;
+}
+
+.btn:focus,
+.form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25) !important;
 }

@@ -1,7 +1,7 @@
 {
-  "name": "backend-microservice",
+  "name": "task-management-backend",
   "version": "1.0.0",
-  "description": "Backend microservice with Express.js",
+  "description": "Task Management Backend microservice with Express.js",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
